@@ -1,0 +1,172 @@
+/* ===== aldo footlocker - Custom Premium Theme ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  /* لمسة ذهبية أعمق وأكثر فخامة */
+  --background: oklch(13% .006 90);
+  --card: oklch(18% .008 90);
+  --popover: oklch(16% .008 90);
+  --primary: oklch(84% .16 87);
+  --secondary: oklch(23% .01 90);
+  --muted: oklch(21% .008 90);
+  --border: oklch(28% .015 90);
+  --input: oklch(28% .015 90);
+  --gold-gradient: linear-gradient(135deg, oklch(92% .13 92), oklch(72% .17 76));
+  --shadow-gold: 0 10px 34px -10px oklch(84% .16 87 / .55);
+}
+
+body{
+  font-family: 'Inter', var(--font-sans);
+  background-image: radial-gradient(circle at 15% 0%, oklch(20% .02 90 / .5), transparent 45%),
+                     radial-gradient(circle at 100% 10%, oklch(18% .02 88 / .4), transparent 40%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, .text-primary.font-bold{
+  font-family: 'Playfair Display', serif;
+  letter-spacing: .01em;
+}
+
+/* Header più elegante */
+header{
+  box-shadow: 0 2px 20px -8px rgb(0 0 0 / .6);
+}
+header .marquee-track span{
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Logo con bordo dorato */
+header img[alt="Logo aldo footlocker"]{
+  border: 2px solid transparent;
+  background: linear-gradient(var(--card), var(--card)) padding-box,
+              var(--gold-gradient) border-box;
+}
+
+/* Pulsanti primari con gradiente dorato e hover morbido */
+.bg-primary{
+  background-image: var(--gold-gradient) !important;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+a.bg-primary:hover, button.bg-primary:hover{
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Card prodotti/promo con hover elegante */
+article.rounded-xl, .rounded-xl.border{
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+article.rounded-xl:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-gold);
+  border-color: oklch(84% .16 87 / .5);
+}
+
+/* Categorie: leggero zoom hover sulle immagini */
+#categorie img, .grid img.rounded-md{
+  transition: transform .3s ease, filter .3s ease;
+}
+#categorie a:hover img, .grid a:hover img.rounded-md{
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+/* Prezzo più in risalto */
+.text-2xl.font-extrabold{
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sezioni "Attenzione alle truffe" più incisive */
+section.border-2.border-primary{
+  background: linear-gradient(180deg, oklch(84% .16 87 / .10), oklch(84% .16 87 / .04));
+  box-shadow: inset 0 0 0 1px oklch(84% .16 87 / .35);
+}
+
+/* Footer più pulito */
+footer{
+  background: linear-gradient(180deg, transparent, oklch(10% .01 90 / .5));
+}
+
+/* Scrollbar più elegante (desktop) */
+::-webkit-scrollbar{ height: 8px; width: 8px; }
+::-webkit-scrollbar-thumb{ background: oklch(40% .02 90); border-radius: 8px; }
+::-webkit-scrollbar-track{ background: transparent; }
+
+/* Performance: keep the large static catalog smooth on mobile. */
+main article { content-visibility: auto; contain-intrinsic-size: 360px 300px; }
+main img { content-visibility: auto; }
+
+article > a[data-gallery]{cursor:pointer;text-decoration:none;color:inherit;display:block}
+
+/* ===== MODERN MOBILE STORE REFRESH ===== */
+:root{
+  --store-black:#090909;
+  --store-panel:#121212;
+  --store-panel-2:#171717;
+  --store-gold:#f4c542;
+  --store-gold-2:#ffdf75;
+  --store-line:rgba(244,197,66,.20);
+}
+html{scroll-behavior:smooth}
+body{background-color:var(--store-black);letter-spacing:.005em}
+header{background:rgba(9,9,9,.92)!important;border-color:var(--store-line)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+header .mx-auto{position:relative}
+header .marquee-track{animation:store-marquee 24s linear infinite}
+@keyframes store-marquee{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+header input{height:42px!important;background:#191919!important;border-color:rgba(255,255,255,.07)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+header button,header a{transition:all .2s ease}
+header button:hover,header a:hover{border-color:rgba(244,197,66,.7)!important;background:rgba(244,197,66,.06)}
+header a.active{display:flex!important}
+header a.active img{width:40px!important;height:40px!important;border-radius:50%!important;object-fit:cover!important;box-shadow:0 0 0 2px rgba(244,197,66,.45),0 0 20px rgba(244,197,66,.12)}
+main{padding-bottom:18px}
+main>section:first-child>div,
+main section[id]{border-radius:20px}
+/* product cards */
+main article.rounded-xl{background:linear-gradient(180deg,#171717,#101010)!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:18px!important;overflow:hidden}
+main article.rounded-xl img{background:#fff;display:block}
+main article.rounded-xl:hover{transform:translateY(-4px) scale(1.005);box-shadow:0 18px 45px rgba(0,0,0,.45),0 0 0 1px rgba(244,197,66,.22)}
+/* category grid */
+#categorie{gap:9px!important}
+#categorie a{position:relative;overflow:hidden;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:#151515;padding:3px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+#categorie a:hover{transform:translateY(-2px);border-color:rgba(244,197,66,.45);box-shadow:0 10px 24px rgba(0,0,0,.3)}
+#categorie img{border-radius:11px!important}
+/* large collection / promo images */
+main img{max-width:100%}
+main section img[alt*="Collezione"],main section img[src*="promo-estate"]{border-radius:20px!important;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+/* brand panel */
+main section>div.flex.items-center.gap-3.rounded-xl{background:linear-gradient(135deg,#1a1812,#111)!important;border-color:rgba(244,197,66,.35)!important;padding:14px!important;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+main section>div.flex.items-center.gap-3.rounded-xl img{width:64px!important;height:64px!important;flex:none;border:2px solid rgba(244,197,66,.6);box-shadow:0 0 25px rgba(244,197,66,.12)}
+/* primary CTA */
+.bg-primary{background:linear-gradient(135deg,#ffe083 0%,#f4c542 48%,#d99b00 100%)!important;color:#111!important;border:0!important;box-shadow:0 8px 24px rgba(244,197,66,.14)}
+/* search/category overlays */
+.local-search-item{background:linear-gradient(180deg,#1a1a1a,#111)!important;border-color:rgba(255,255,255,.08)!important}
+.local-search-item:hover{border-color:rgba(244,197,66,.5)!important;transform:translateY(-2px)}
+.local-cat-panel{background:#101010!important}
+.local-cat-item img{border:1px solid rgba(255,255,255,.08)}
+/* footer */
+footer{margin-top:18px;background:#0b0b0b!important;border-color:rgba(244,197,66,.16)!important}
+footer img{width:72px!important;height:72px!important;box-shadow:0 0 0 2px rgba(244,197,66,.35),0 12px 28px rgba(0,0,0,.4)}
+/* image loading fallback */
+img{font-size:10px}
+@media(max-width:640px){
+  header .mx-auto{height:auto!important;min-height:64px;padding-top:8px!important;padding-bottom:8px!important;display:grid!important;grid-template-columns:auto 1fr auto;grid-template-rows:42px 28px;gap:6px!important}
+  header .mx-auto>button{grid-column:1;grid-row:1}
+  header .mx-auto>div.relative{grid-column:1 / -1;grid-row:2;order:5}
+  header .mx-auto>a.active{grid-column:2;grid-row:1;justify-self:center;display:flex!important}
+  header .mx-auto>a[href*="wa.me"]{grid-column:3;grid-row:1}
+  header .mx-auto>a[href="spedizioni.html"]{display:none!important}
+  header input{height:38px!important}
+  main article.rounded-xl{border-radius:16px!important}
+  #categorie{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+
+.store-brand-strip{max-width:1152px;margin:12px auto 0;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(244,197,66,.18);border-radius:16px;background:linear-gradient(135deg,rgba(244,197,66,.09),rgba(255,255,255,.025));}
+.store-brand-strip strong{display:block;color:#f4c542;font-family:"Playfair Display",serif;font-size:17px;letter-spacing:.08em}.store-brand-strip span{display:block;color:#8f8f8f;font-size:11px;margin-top:2px}.store-brand-strip a{color:#111;background:#f4c542;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:800;text-decoration:none}@media(max-width:640px){.store-brand-strip{margin:8px 10px 0;padding:10px 12px}.store-brand-strip strong{font-size:14px}.store-brand-strip a{padding:7px 10px}}
