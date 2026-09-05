@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="public, max-age=86400">
+<title>Prodotto | aldo footlocker</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff}.wrap{max-width:900px;margin:auto;padding:16px}.top{display:flex;gap:10px;align-items:center;margin-bottom:16px}.back{color:#fff;text-decoration:none;border:1px solid #555;border-radius:999px;padding:9px 14px}.card{background:#1b1b1b;border:1px solid #333;border-radius:16px;padding:14px}.hero{width:100%;max-height:70vh;object-fit:contain;background:#000;border-radius:12px;cursor:zoom-in;display:block}.thumbs{display:flex;gap:8px;overflow:auto;margin-top:10px}.thumbs button{padding:0;border:0;background:none}.thumbs img{width:70px;height:70px;object-fit:cover;border-radius:8px;border:2px solid transparent}.thumbs img.active{border-color:#25d366}.title{font-size:18px;font-weight:700;margin:14px 0 8px;line-height:1.4}.price{font-size:20px;font-weight:800;color:#e7b93b}.info{white-space:pre-line;color:#ddd;line-height:1.5}.wa{display:block;text-align:center;background:#25d366;color:#071b0c;text-decoration:none;font-weight:700;padding:12px;border-radius:999px;margin-top:14px}
+</style></head><body><div class="wrap"><div class="top"><a class="back" href="javascript:history.back()">← Torna</a><b>aldo footlocker</b></div><div id="app" class="card">Caricamento…</div></div>
+<script>
+let product=null,current=0;const app=document.getElementById('app');
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+function getImages(p){return [...new Set((Array.isArray(p.photos)?p.photos:[]).filter(Boolean))]}
+function imgUrl(url,size=800){
+ try{ return String(url||''); }catch(e){return url}
+}
+async function start(){
+ const qs=new URLSearchParams(location.search), key=qs.get('p'), oldId=qs.get('g');
+ try{
+  if(key){const r=await fetch('api/product-pages.json',{cache:'force-cache'});if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();product=data[key]||null;}
+  if(!product&&oldId){const r=await fetch('api/products.json',{cache:'force-cache'});if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();const x=data.find(v=>String(v.id)===String(oldId));if(x)product={title:x.title,photos:x.images||[],price:x.price||x.priceText||'',info:x.description||x.details||x.category||''};}
+  if(!product){app.innerHTML='<p>Prodotto non trovato.</p>';return}render();
+ }catch(e){console.error(e);app.innerHTML='<p>Impossibile caricare il prodotto.</p>'}
+}
+function render(){const imgs=getImages(product);current=Math.min(current,Math.max(0,imgs.length-1));const src=imgs[current]||'';const title=product.title||'Prodotto';const price=product.price||'';const info=product.info||'';const wa='https://wa.me/393500990297?text='+encodeURIComponent('Ciao aldo footlocker! Sono interessato a questo articolo: '+title+'\n🔗 '+location.href);app.innerHTML=`${src?`<img class="hero" src="${esc(imgUrl(src,800))}" fetchpriority="high" decoding="async" alt="${esc(title)}" onclick="nextImage()">`:''}<div class="thumbs">${imgs.map((x,i)=>`<button type="button" onclick="showImage(${i})"><img loading="lazy" decoding="async" class="${i===current?'active':''}" src="${esc(imgUrl(x,160))}" alt="Foto ${i+1}"></button>`).join('')}</div><div class="title">${esc(title)}</div>${price?`<div class="price">${esc(price)}</div>`:''}${info?`<div class="info">${esc(info)}</div>`:''}<a class="wa" target="_blank" rel="noopener" href="${esc(wa)}">Ordina questo prodotto su WhatsApp</a>`}
+function showImage(i){current=i;render()}function nextImage(){const n=getImages(product).length;if(n>1){current=(current+1)%n;render()}}
+start();
+</script><script defer src="assets/lucky-wheel.js"></script>
+<style id="aldo-auth-style">
+#aldo-auth-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);font-family:Arial,sans-serif}
+#aldo-auth-card{width:min(100%,420px);max-height:92vh;overflow:auto;border:1px solid #d9a900;border-radius:24px;background:#11110f;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,.7);padding:28px 22px}
+.aldo-auth-logo{display:block;width:86px;height:86px;object-fit:cover;border-radius:50%;margin:0 auto 14px;border:2px solid #e7b928}
+.aldo-auth-brand{text-align:center;color:#f1c338;font-weight:800;letter-spacing:.18em;font-size:13px;text-transform:uppercase}
+.aldo-auth-title{text-align:center;font-size:27px;margin:8px 0 7px;font-weight:800}.aldo-auth-sub{text-align:center;color:#b8b5ad;font-size:14px;line-height:1.55;margin-bottom:22px}
+.aldo-auth-label{display:block;font-size:13px;font-weight:700;margin:12px 0 7px;color:#eee}.aldo-auth-input{width:100%;box-sizing:border-box;background:#1b1a17;border:1px solid #3b3932;color:#fff;border-radius:13px;padding:13px 14px;font-size:16px;outline:none}.aldo-auth-input:focus{border-color:#e7b928;box-shadow:0 0 0 3px rgba(231,185,40,.12)}
+#aldo-auth-submit{width:100%;border:0;border-radius:14px;padding:14px;margin-top:18px;background:linear-gradient(135deg,#ffe07a,#e8ad00);color:#15130d;font-size:16px;font-weight:900;cursor:pointer}.aldo-auth-note{font-size:11px;color:#88857c;text-align:center;margin-top:14px;line-height:1.5}.aldo-auth-error{display:none;margin-top:10px;color:#ff7c7c;font-size:12px;text-align:center;font-weight:700}
+#aldo-profile-badge{position:fixed;right:12px;bottom:14px;z-index:70;background:#171611;border:1px solid #d9a900;color:#f1c338;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.35);cursor:pointer}
+</style>
+<script id="aldo-auth-script">
+(function(){
+  const KEY='aldo_footlocker_user_v1';
+  function getLogo(){return '__l5e/assets-v1/dd94fc35-b12f-4f05-93fc-8bd505243901/aldo-logo.jpg';}
+  function user(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+  function validAge(v){const n=Number(v);return Number.isFinite(n)&&n>=18&&n<=120}
+  function mount(){
+    const u=user();
+    if(!u){
+      const ov=document.createElement('div'); ov.id='aldo-auth-overlay';
+      ov.innerHTML=`<div id="aldo-auth-card" role="dialog" aria-modal="true" aria-labelledby="aldo-auth-title">
+        <img class="aldo-auth-logo" src="${getLogo()}" alt="ALDO FOOTLOCKER">
+        <div class="aldo-auth-brand">ALDO FOOTLOCKER</div>
+        <h1 id="aldo-auth-title" class="aldo-auth-title">Crea il tuo account</h1>
+        <p class="aldo-auth-sub">Registrati per continuare e accedere alle offerte e alla ruota della fortuna.</p>
+        <label class="aldo-auth-label" for="aldo-name">Nome completo</label>
+        <input id="aldo-name" class="aldo-auth-input" autocomplete="name" maxlength="80" placeholder="Inserisci il tuo nome">
+        <label class="aldo-auth-label" for="aldo-age">Età</label>
+        <input id="aldo-age" class="aldo-auth-input" type="number" inputmode="numeric" min="18" max="120" placeholder="Inserisci la tua età">
+        <div style="font-size:12px;color:#c9a928;margin-top:8px">🔒 Devi avere almeno 18 anni per registrarti.</div>
+        <div id="aldo-auth-error" class="aldo-auth-error"></div>
+        <button id="aldo-auth-submit" type="button">REGISTRATI</button>
+        <div class="aldo-auth-note">I dati vengono salvati solo sul dispositivo tramite il browser. Non vengono inviati a un server.</div>
+      </div>`;
+      document.body.appendChild(ov);
+      const submit=()=>{
+        const name=document.getElementById('aldo-name').value.trim();
+        const age=document.getElementById('aldo-age').value.trim();
+        const err=document.getElementById('aldo-auth-error');
+        if(name.length<2){err.textContent='Inserisci un nome valido.';err.style.display='block';return}
+        if(!validAge(age)){err.textContent='La registrazione è disponibile solo per utenti di almeno 18 anni.';err.style.display='block';return}
+        localStorage.setItem(KEY,JSON.stringify({name:name,age:Number(age),registeredAt:new Date().toISOString()}));
+        ov.remove(); showBadge();
+      };
+      document.getElementById('aldo-auth-submit').addEventListener('click',submit);
+      document.getElementById('aldo-age').addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
+      document.getElementById('aldo-name').focus();
+    }else showBadge();
+  }
+  function showBadge(){
+    if(document.getElementById('aldo-profile-badge'))return;
+    const u=user(); if(!u)return;
+    const b=document.createElement('button');b.id='aldo-profile-badge';b.type='button';b.title='Profilo';b.textContent='👤 '+u.name;
+    b.onclick=function(){
+      if(confirm('Vuoi eliminare il tuo account locale da questo dispositivo?')){localStorage.removeItem(KEY);location.reload();}
+    };
+    document.body.appendChild(b);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+})();
+</script><script src="assets/cart.js"></script></body></html>
